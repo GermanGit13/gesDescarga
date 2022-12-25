@@ -20,7 +20,11 @@ import java.util.Scanner;
 
 public class AppController {
 
+    public TextField tfUrl; //Caja de Texto que usamos en JavaFx
+    public Button btDownload; // Botón que usamos para la descarga en JavaFx
+    public TabPane tpDownloads; //Panel creado en JavaFx para que las descargas se añadan en pestañas
 
+//    private Map<String, DownloadController> allDownloads; // Creamos un mapa para guardar todas las descargas
 
 
 }
