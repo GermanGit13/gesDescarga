@@ -57,8 +57,7 @@ public class AppController {
 
         try {
             FXMLLoader loader = new FXMLLoader(); //Creamos un objeto FMXLloader que se encargará de Montarnos la interfaz de lo otra ventana
-            //Todo cambiar por la ventana que necesitamos presentar al realizar las descargas
-            loader.setLocation(R.getUI("gesDescargaHome.fxml")); // Le pasamos la localización de la ventana diseñada con JavaFx
+            loader.setLocation(R.getUI("gesDownload.fxml")); // Le pasamos la localización de la ventana diseñada con JavaFx
 
             DownloadController downloadController = new DownloadController(url); //Creamos su propio controler desde su clase DownloadController para gestionar los botones y demás cosas
             loader.setController(downloadController);
