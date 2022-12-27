@@ -5,16 +5,15 @@ import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+
 import java.io.File;
 import java.io.IOException;
-import java.net.FileNameMap;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,9 +26,9 @@ public class DownloadController implements Initializable {
     private String urlText;
     private DownloadTask downloadTask;
     private Stage stage;
+    private String dir;
 
-
-    private static final Logger logger = LogManager.getLogger(DownloadController.class); //Para disponer de un log de la clase DownloadController.class
+    private static final Logger logger = LogManager.getLogger(DownloadController.class);
 
     public DownloadController(String urlText) {
         logger.info("Descarga " + urlText + " creada");
@@ -48,8 +47,9 @@ public class DownloadController implements Initializable {
         // Quitar comentario para descarga desde fichero desde este método sería automático el guardar los ficheros
         try {
             String fileName = this.urlText.substring(this.urlText.lastIndexOf("/") + 1); //Extraemos la parte a continuación del / para ponerla como nombre de fichero
-            File file = new File(fileName);
+            File file = new File(dir, fileName);
             file.createNewFile();
+
             downloadTask = new DownloadTask(urlText, file); //Le pasamos a Task la url y el archivo donde se guarda
 
             pbProgress.progressProperty().unbind();

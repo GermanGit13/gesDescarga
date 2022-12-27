@@ -4,13 +4,19 @@ import com.svalero.gesdescarga.util.R;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,7 +29,7 @@ public class AppController {
     public TextField tfUrl; //Caja de Texto que usamos en JavaFx
     public Button btDownload; // Botón que usamos para la descarga en JavaFx
     public TabPane tpDownloads; //Panel creado en JavaFx para que las descargas se añadan en pestañas
-
+    public Button btLog; //Botón para abrir el log
 
     private Map<String, DownloadController> allDownloads; // Creamos un mapa para guardar todas las descargas
 
@@ -89,6 +95,50 @@ public class AppController {
     }
 
     /**
+     * Ver Log
+     * @param event
+     */
+    @FXML
+    public void readLog(ActionEvent event) {
+        readLog();
+    }
+
+
+    /**
+     * Funciona abre otra ventana
+     */
+    public void readLog() {
+
+        try {
+            File logFile = new File("H:\\Grapo DAM\\10 Programación de Servicios y Procesos\\AP_German_Rodriguez\\multidescargas.log");
+            if (!Desktop.isDesktopSupported()) {
+                System.out.println(" no soportado");
+                return;
+            }
+            Desktop desktop = Desktop.getDesktop();
+            if(logFile.exists())
+                desktop.open(logFile);
+        } catch (IOException ioe) {
+            ioe.printStackTrace(); //Pintamos la traza
+        }
+    }
+
+//    private void readLog(File file) {
+//        try {
+//            FXMLLoader loader = new FXMLLoader(); //Creamos un objeto FMXLloader que se encargará de Montarnos la interfaz de lo otra ventana
+//            loader.setLocation(R.getUI("gesLog.fxml")); // Le pasamos la localización de la ventana diseñada con JavaFx
+//
+//            LogController LogController = new LogController(); //Creamos su propio controler desde su clase DownloadController para gestionar los botones y demás cosas
+//            loader.setController(LogController);
+//            //Todo revisar si crearé un VBox o el padre será de otro tipo
+//            VBox logBox = loader.load(); //En este caso el padre de la ventana es un Vbox en JavaFx
+//
+//        } catch (IOException ioe) {
+//            ioe.printStackTrace(); //Pintamos la traza
+//        }
+//    }
+
+    /**
      * Recorremos el ArrayList y cancelamos todas las descargas
      */
     @FXML
@@ -133,6 +183,7 @@ public class AppController {
             System.out.println("Se ha producido un error");
             fnfe.printStackTrace();
         }
+
 
 
         //Leo el fichero y cargo cada linea un List (Clase Files)

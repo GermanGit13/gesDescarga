@@ -1,0 +1,10 @@
+17:16:07.112 [JavaFX Application Thread] INFO  com.svalero.gesdescarga.controller.DownloadController - Descarga http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4 creada
+17:16:07.138 [Thread-3] TRACE com.svalero.gesdescarga.controller.DownloadController - Descargahttp://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4iniciada
+17:16:07.162 [JavaFX Application Thread] INFO  com.svalero.gesdescarga.controller.DownloadController - Descarga http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4 creada
+17:16:07.178 [Thread-4] TRACE com.svalero.gesdescarga.controller.DownloadController - Descargahttp://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4iniciada
+17:16:07.182 [JavaFX Application Thread] INFO  com.svalero.gesdescarga.controller.DownloadController - Descarga http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4 creada
+17:16:07.205 [JavaFX Application Thread] INFO  com.svalero.gesdescarga.controller.DownloadController - Descarga https://raw.githubusercontent.com/LearnWebCode/json-example/master/animals-1.json creada
+17:16:07.207 [Thread-5] TRACE com.svalero.gesdescarga.controller.DownloadController - Descargahttp://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4iniciada
+17:16:07.221 [Thread-6] TRACE com.svalero.gesdescarga.controller.DownloadController - Descargahttps://raw.githubusercontent.com/LearnWebCode/json-example/master/animals-1.jsoniniciada
+17:16:08.233 [Thread-5] TRACE com.svalero.gesdescarga.controller.DownloadController - Descarga http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4 finalizada
+17:16:08.273 [Thread-6] TRACE com.svalero.gesdescarga.controller.DownloadController - Descarga https://raw.githubusercontent.com/LearnWebCode/json-example/master/animals-1.json finalizada
