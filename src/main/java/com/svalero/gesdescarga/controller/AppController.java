@@ -30,6 +30,7 @@ public class AppController {
     public Button btDownload; // Botón que usamos para la descarga en JavaFx
     public TabPane tpDownloads; //Panel creado en JavaFx para que las descargas se añadan en pestañas
     public Button btLog; //Botón para abrir el log
+    public VBox vbLog;
 
     private Map<String, DownloadController> allDownloads; // Creamos un mapa para guardar todas las descargas
 
@@ -103,40 +104,23 @@ public class AppController {
         readLog();
     }
 
-
     /**
-     * Funciona abre otra ventana
+     * Prueba
      */
     public void readLog() {
-
         try {
-            File logFile = new File("H:\\Grapo DAM\\10 Programación de Servicios y Procesos\\AP_German_Rodriguez\\multidescargas.log");
-            if (!Desktop.isDesktopSupported()) {
-                System.out.println(" no soportado");
-                return;
-            }
-            Desktop desktop = Desktop.getDesktop();
-            if(logFile.exists())
-                desktop.open(logFile);
+
+            FXMLLoader loader = new FXMLLoader(); //Creamos un objeto FMXLloader que se encargará de Montarnos la interfaz de lo otra ventana
+            loader.setLocation(R.getUI("gesLog.fxml")); // Le pasamos la localización de la ventana diseñada con JavaFx
+            LogController logController = new LogController(); //Creamos su propio controler desde su clase LogController para gestionar los botones y demás cosas
+            loader.setController(logController);
+            //Todo revisar si crearé un VBox o el padre será de otro tipo
+            VBox logBox = loader.load(); //En este caso el padre de la ventana es un Vbox en JavaFx
+
         } catch (IOException ioe) {
             ioe.printStackTrace(); //Pintamos la traza
         }
     }
-
-//    private void readLog(File file) {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(); //Creamos un objeto FMXLloader que se encargará de Montarnos la interfaz de lo otra ventana
-//            loader.setLocation(R.getUI("gesLog.fxml")); // Le pasamos la localización de la ventana diseñada con JavaFx
-//
-//            LogController LogController = new LogController(); //Creamos su propio controler desde su clase DownloadController para gestionar los botones y demás cosas
-//            loader.setController(LogController);
-//            //Todo revisar si crearé un VBox o el padre será de otro tipo
-//            VBox logBox = loader.load(); //En este caso el padre de la ventana es un Vbox en JavaFx
-//
-//        } catch (IOException ioe) {
-//            ioe.printStackTrace(); //Pintamos la traza
-//        }
-//    }
 
     /**
      * Recorremos el ArrayList y cancelamos todas las descargas
@@ -193,3 +177,37 @@ public class AppController {
         // Para cada linea, llamar al método launchDownload que por cada linea de fichero que le pasamos creo una pestaña de descarga
     }
 }
+
+/**
+ * Funciona abre otra ventana Pruebas
+ */
+//    public void readLog() {
+//
+//        try {
+//            File logFile = new File("H:\\Grapo DAM\\10 Programación de Servicios y Procesos\\AP_German_Rodriguez\\multidescargas.log");
+//            if (!Desktop.isDesktopSupported()) {
+//                System.out.println(" no soportado");
+//                return;
+//            }
+//            Desktop desktop = Desktop.getDesktop();
+//            if(logFile.exists())
+//                desktop.open(logFile);
+//        } catch (IOException ioe) {
+//            ioe.printStackTrace(); //Pintamos la traza
+//        }
+//    }
+
+//    private void readLog(File file) {
+//        try {
+//            FXMLLoader loader = new FXMLLoader(); //Creamos un objeto FMXLloader que se encargará de Montarnos la interfaz de lo otra ventana
+//            loader.setLocation(R.getUI("gesLog.fxml")); // Le pasamos la localización de la ventana diseñada con JavaFx
+//
+//            LogController LogController = new LogController(); //Creamos su propio controler desde su clase DownloadController para gestionar los botones y demás cosas
+//            loader.setController(LogController);
+//            //Todo revisar si crearé un VBox o el padre será de otro tipo
+//            VBox logBox = loader.load(); //En este caso el padre de la ventana es un Vbox en JavaFx
+//
+//        } catch (IOException ioe) {
+//            ioe.printStackTrace(); //Pintamos la traza
+//        }
+//    }
