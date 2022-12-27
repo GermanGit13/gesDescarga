@@ -47,7 +47,7 @@
          <children>
             <ToolBar prefHeight="40.0" prefWidth="200.0">
               <items>
-                <Button mnemonicParsing="false" text="Configurar Ruta Guardado" />
+                <Button fx:id="btConfigurar" mnemonicParsing="false" text="Configurar Ruta Guardado" />
                   <Button fx:id="btLog" mnemonicParsing="false" onAction="#readLog" text="Ver Registro" />
               </items>
             </ToolBar>

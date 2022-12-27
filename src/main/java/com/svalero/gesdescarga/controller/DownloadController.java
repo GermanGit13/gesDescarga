@@ -26,7 +26,7 @@ public class DownloadController implements Initializable {
     private String urlText;
     private DownloadTask downloadTask;
     private Stage stage;
-    private String dir;
+    private String dir = "H:\\Grapo DAM\\10 Programación de Servicios y Procesos\\AP_German_Rodriguez\\downloads";
 
     private static final Logger logger = LogManager.getLogger(DownloadController.class);
 
