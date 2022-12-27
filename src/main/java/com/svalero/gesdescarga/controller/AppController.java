@@ -24,6 +24,7 @@ public class AppController {
     public Button btDownload; // Botón que usamos para la descarga en JavaFx
     public TabPane tpDownloads; //Panel creado en JavaFx para que las descargas se añadan en pestañas
 
+
     private Map<String, DownloadController> allDownloads; // Creamos un mapa para guardar todas las descargas
 
     /**
@@ -34,9 +35,9 @@ public class AppController {
     }
 
     /**
-     * Método que se ejecuta cuando pulsamos el botón descarga, lo ponemos en onAction  Scene Builder para que JavaFx lo encuentre
-     * Recoge la url que hay en la caja de texto "tfUrl" y ejecuta la descarga o lo implantado dentro del  método
-     * @param event Recibimos el evento una vez pulsado sobre el boton que creamos en Scene Builder
+     * Método que se ejecuta cuando pulsamos el botón descarga, lo ponemos en onAction Scene Builder para que JavaFx lo encuentre
+     * Recoge la url que hay en la caja de texto "tfUrl" y ejecuta la descarga o lo implantado dentro del método
+     * @param event Recibimos el evento una vez pulsado sobre el botón que creamos en Scene Builder
      * @FXML : Para hacer la conexión, que JavaFx haga la conexión y la integración de manera directa. Siempre poner está anotación de JavaFX
      */
     @FXML
@@ -65,7 +66,8 @@ public class AppController {
             VBox downloadBox = loader.load(); //En este caso el padre de la ventana es un Vbox en JavaFx
 
             String filename = url.substring(url.lastIndexOf("/") + 1); //para añadirle a cada pestaña el final de la URL que le pasamos, gracias al filename.
-            tpDownloads.getTabs().add(new Tab(filename, downloadBox)); //Lo añadimos al panel de ventana de "multidownload.fxml"y añadimos una PESTAÑA por cada descarga que le damos.
+            tpDownloads.getTabs().add(new Tab(filename, downloadBox)); //Lo añadimos al panel de ventana de "gesDescargaHome.fxml"y añadimos una PESTAÑA por cada descarga que le damos.
+            downloadBox.getScene().getWindow(); //Parar cerrar cada pestaña creada en el Tab
 
             allDownloads.put(url, downloadController); //Cada vez que lancemos una descarga lo añadimos al mapa para poder cancelarlas todas, tenemos cada url de descarga asociado al objeto que se crea por cada descarga
 

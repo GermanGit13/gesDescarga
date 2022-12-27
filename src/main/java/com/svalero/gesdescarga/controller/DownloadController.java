@@ -5,10 +5,8 @@ import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
-import javafx.scene.control.TextField;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
@@ -29,6 +27,7 @@ public class DownloadController implements Initializable {
     private String urlText;
     private DownloadTask downloadTask;
     private Stage stage;
+
 
     private static final Logger logger = LogManager.getLogger(DownloadController.class); //Para disponer de un log de la clase DownloadController.class
 
@@ -131,10 +130,9 @@ public class DownloadController implements Initializable {
     @FXML
     public void stop(ActionEvent event) {
         stop();
-        /*
+
         logger.trace("Descarga " + urlText + " detenida");
         downloadTask.cancel();
-         */
     }
 
     /**
@@ -152,5 +150,6 @@ public class DownloadController implements Initializable {
     public String getUrlText() {
         return urlText;
     }
+
 }
 
