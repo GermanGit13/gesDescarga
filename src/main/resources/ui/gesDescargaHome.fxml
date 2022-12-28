@@ -35,9 +35,11 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
@@ -45,48 +47,91 @@
    <content>
       <VBox fx:id="panel" prefHeight="648.0" prefWidth="696.0">
          <children>
-            <ToolBar prefHeight="40.0" prefWidth="200.0">
-              <items>
-                <Button fx:id="btConfigurar" mnemonicParsing="false" text="Configurar Ruta Guardado" />
-                  <Button fx:id="btLog" mnemonicParsing="false" onAction="#readLog" text="Ver Registro" />
-              </items>
-            </ToolBar>
-            <TextField fx:id="tfUrl" prefHeight="25.0" prefWidth="590.0">
-               <VBox.margin>
-                  <Insets left="5.0" right="5.0" top="10.0" />
-               </VBox.margin>
-            </TextField>
-            <HBox prefHeight="100.0" prefWidth="594.0">
-               <children>
-                  <Button fx:id="btDownload" mnemonicParsing="false" onAction="#launchDownload" text="Descarga">
-                     <HBox.margin>
-                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding></Button>
-                  <Button fx:id="btFlileDownload" mnemonicParsing="false" onAction="#launchFileDownload" text="Descargar mediante DLC">
-                     <HBox.margin>
-                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding></Button>
-                  <Button fx:id="btsStopAllDownloads" mnemonicParsing="false" onAction="#stopAllDownloads" text="Cancelar todas las descargas">
-                     <HBox.margin>
-                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
-                     </HBox.margin>
-                     <padding>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                     </padding>
-                  </Button>
-               </children>
+            <TitledPane animated="false" text="Configurar Aplicación">
+               <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <HBox>
+                           <children>
+                              <Button fx:id="btRoute" mnemonicParsing="false" onAction="#routeSelect" text="Cambiar Ruta">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <TextField fx:id="tfRoute" prefHeight="25.0" prefWidth="564.0" promptText="H:/GERMAN/Descargas">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </TextField>
+                           </children>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </TitledPane>
+            <TabPane tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                  <Tab text="Opciones Descarga">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0">
+                           <children>
+                              <Button fx:id="btFlileDownload" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" onAction="#launchFileDownload" text="Descargar mediante DLC">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </Button>
+                              <Button fx:id="btsStopAllDownloads" layoutX="169.0" layoutY="15.0" mnemonicParsing="false" onAction="#stopAllDownloads" text="Cancelar todas las descargas" textFill="#f50e0e">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                <Tab text="Log">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="btLog" layoutX="15.0" layoutY="15.0" mnemonicParsing="false" onAction="#readLog" text="Ver Registro" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
+            <HBox>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </HBox>
-            <TabPane fx:id="tpDownloads" prefHeight="205.0" prefWidth="696.0" />
-            <VBox fx:id="vbLog" prefHeight="200.0" prefWidth="100.0" />
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button fx:id="btDownload" mnemonicParsing="false" onAction="#launchDownload" prefHeight="27.0" prefWidth="83.0" text="Descarga" textFill="#29d712" underline="true">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="10.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </Button>
+                  <TextField fx:id="tfUrl" prefHeight="27.0" prefWidth="564.0">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </TextField>
+               </children>
+            </HBox>
+            <TabPane fx:id="tpDownloads" prefHeight="375.0" prefWidth="696.0" />
          </children>
       </VBox>
    </content>
