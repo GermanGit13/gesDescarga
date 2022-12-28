@@ -31,11 +31,12 @@ public class AppController {
 
     public TextField tfUrl; //Caja de Texto que usamos en JavaFx
     public TextField tfRoute; //Caja con la ruta de Descarga
-    public String route = "H:/GERMAN/Descargas"; //Ruta con la descarga
     public Button btDownload; // Botón que usamos para la descarga en JavaFx
-    public TabPane tpDownloads; //Panel creado en JavaFx para que las descargas se añadan en pestañas
+    public Button btRoute; //Boton para buscar la ruta de guardar
     public Button btLog; //Botón para abrir el log
-    public VBox vbLog;
+    public TabPane tpDownloads; //Panel creado en JavaFx para que las descargas se añadan en pestañas
+    public VBox vbLog; //lo uso para el log
+    public String route = "H:/GERMAN/Descargas"; //Ruta con la descarga
 
     private Map<String, DownloadController> allDownloads; // Creamos un mapa para guardar todas las descargas
 
@@ -73,7 +74,7 @@ public class AppController {
             loader.setLocation(R.getUI("gesDownload.fxml")); // Le pasamos la localización de la ventana diseñada con JavaFx
 
             DownloadController downloadController = new DownloadController(url, route); //Creamos su propio controler desde su clase DownloadController para gestionar los botones y demás cosas
-            loader.setController(downloadController);
+            loader.setController(downloadController); //cargamos el controller
             //Todo revisar si crearé un VBox o el padre será de otro tipo
             VBox downloadBox = loader.load(); //En este caso el padre de la ventana es un Vbox en JavaFx
 
@@ -84,56 +85,20 @@ public class AppController {
             allDownloads.put(url, downloadController); //Cada vez que lancemos una descarga lo añadimos al mapa para poder cancelarlas todas, tenemos cada url de descarga asociado al objeto que se crea por cada descarga
 
         } catch (IOException ioe) {
-            ioe.printStackTrace(); //Pintamos la traza
+            ioe.printStackTrace();
         }
     }
 
     /**
-     * Quitar comentario para descarga desde fichero.
+     * Para descargar desde Fichero
      * @param event
      */
     @FXML
     public void launchFileDownload(ActionEvent event) {
-        String urlText = tfUrl.getText();
+        String urlText = tfUrl.getText(); //Le pasamos la ruta de donde esta el ficehro
         tfUrl.clear();
         tfUrl.requestFocus();
         readDLC(); //Llamamos al método que leerá el fichero
-    }
-
-    /**
-     * Ver Log
-     * @param event
-     */
-    @FXML
-    public void readLog(ActionEvent event) {
-        readLog();
-    }
-
-    /**
-     * Prueba
-     */
-    public void readLog() {
-        try {
-
-            FXMLLoader loader = new FXMLLoader(); //Creamos un objeto FMXLloader que se encargará de Montarnos la interfaz de lo otra ventana
-            loader.setLocation(R.getUI("gesLog.fxml")); // Le pasamos la localización de la ventana diseñada con JavaFx
-            LogController logController = new LogController(); //Creamos su propio controler desde su clase LogController para gestionar los botones y demás cosas
-            loader.setController(logController);
-            //Todo revisar si crearé un VBox o el padre será de otro tipo
-            VBox logBox = loader.load(); //En este caso el padre de la ventana es un Vbox en JavaFx
-
-        } catch (IOException ioe) {
-            ioe.printStackTrace(); //Pintamos la traza
-        }
-    }
-
-    /**
-     * Recorremos el ArrayList y cancelamos todas las descargas
-     */
-    @FXML
-    public void stopAllDownloads() {
-        for ( DownloadController downloadController : allDownloads.values()) // devuelve una coleccion de los valores
-            downloadController.stop();
     }
 
     /**
@@ -181,7 +146,43 @@ public class AppController {
     }
 
     /**
-     * Seleccionar directorio de Descargas
+     * Método que llamamos desde el boton btLog
+     * @param event
+     */
+    @FXML
+    public void readLog(ActionEvent event) {
+        readLog();
+    }
+
+    /**
+     * Prueba
+     */
+    public void readLog() {
+        try {
+
+            FXMLLoader loader = new FXMLLoader(); //Creamos un objeto FMXLloader que se encargará de Montarnos la interfaz de lo otra ventana
+            loader.setLocation(R.getUI("gesLog.fxml")); // Le pasamos la localización de la ventana diseñada con JavaFx
+            LogController logController = new LogController(); //Creamos su propio controler desde su clase LogController para gestionar los botones y demás cosas
+            loader.setController(logController);
+            //Todo revisar si crearé un VBox o el padre será de otro tipo
+            VBox logBox = loader.load(); //En este caso el padre de la ventana es un Vbox en JavaFx
+
+        } catch (IOException ioe) {
+            ioe.printStackTrace(); //Pintamos la traza
+        }
+    }
+
+    /**
+     * Recorremos el ArrayList y cancelamos todas las descargas
+     */
+    @FXML
+    public void stopAllDownloads() {
+        for ( DownloadController downloadController : allDownloads.values()) // devuelve una coleccion de los valores
+            downloadController.stop();
+    }
+
+    /**
+     * Método que llamamos desde le boton btRoute para seleccionar el directorio de descarga
      */
     @FXML
     public void routeSelect(Event event) {
@@ -192,36 +193,3 @@ public class AppController {
     }
 }
 
-/**
- * Funciona abre otra ventana Pruebas
- */
-//    public void readLog() {
-//
-//        try {
-//            File logFile = new File("H:\\Grapo DAM\\10 Programación de Servicios y Procesos\\AP_German_Rodriguez\\multidescargas.log");
-//            if (!Desktop.isDesktopSupported()) {
-//                System.out.println(" no soportado");
-//                return;
-//            }
-//            Desktop desktop = Desktop.getDesktop();
-//            if(logFile.exists())
-//                desktop.open(logFile);
-//        } catch (IOException ioe) {
-//            ioe.printStackTrace(); //Pintamos la traza
-//        }
-//    }
-
-//    private void readLog(File file) {
-//        try {
-//            FXMLLoader loader = new FXMLLoader(); //Creamos un objeto FMXLloader que se encargará de Montarnos la interfaz de lo otra ventana
-//            loader.setLocation(R.getUI("gesLog.fxml")); // Le pasamos la localización de la ventana diseñada con JavaFx
-//
-//            LogController LogController = new LogController(); //Creamos su propio controler desde su clase DownloadController para gestionar los botones y demás cosas
-//            loader.setController(LogController);
-//            //Todo revisar si crearé un VBox o el padre será de otro tipo
-//            VBox logBox = loader.load(); //En este caso el padre de la ventana es un Vbox en JavaFx
-//
-//        } catch (IOException ioe) {
-//            ioe.printStackTrace(); //Pintamos la traza
-//        }
-//    }

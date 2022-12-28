@@ -35,9 +35,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
@@ -45,13 +46,29 @@
    <content>
       <VBox fx:id="panel" prefHeight="648.0" prefWidth="696.0">
          <children>
-            <ToolBar prefHeight="40.0" prefWidth="200.0">
-              <items>
-                  <TextField fx:id="tfRoute" prefHeight="25.0" prefWidth="498.0" promptText="H:/GERMAN/Descargas" />
-                <Button fx:id="btConfigurar" mnemonicParsing="false" onAction="#routeSelect" text="Cambiar Ruta" />
-                  <Button fx:id="btLog" mnemonicParsing="false" onAction="#readLog" text="Ver Registro" />
-              </items>
-            </ToolBar>
+            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                  <Tab text="Ruta Descarga">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="84.0" prefWidth="696.0">
+                           <children>
+                              <TextField fx:id="tfRoute" layoutX="110.0" layoutY="20.0" prefHeight="25.0" prefWidth="564.0" promptText="H:/GERMAN/Descargas" />
+                              <Button fx:id="btRoute" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#routeSelect" text="Cambiar Ruta" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                <Tab text="Log">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="btLog" layoutX="16.0" layoutY="14.0" mnemonicParsing="false" onAction="#readLog" text="Ver Registro" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+              </tabs>
+            </TabPane>
             <TextField fx:id="tfUrl" prefHeight="25.0" prefWidth="590.0">
                <VBox.margin>
                   <Insets left="5.0" right="5.0" top="10.0" />
