@@ -14,7 +14,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class LogController implements Initializable {
-    private String cadena;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

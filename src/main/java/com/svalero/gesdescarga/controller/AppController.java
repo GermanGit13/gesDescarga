@@ -2,6 +2,7 @@ package com.svalero.gesdescarga.controller;
 
 import com.svalero.gesdescarga.util.R;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,8 +13,10 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import jdk.jfr.FlightRecorder;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +30,8 @@ import java.util.Scanner;
 public class AppController {
 
     public TextField tfUrl; //Caja de Texto que usamos en JavaFx
+    public TextField tfRoute; //Caja con la ruta de Descarga
+    public String route = "H:/GERMAN/Descargas"; //Ruta con la descarga
     public Button btDownload; // Botón que usamos para la descarga en JavaFx
     public TabPane tpDownloads; //Panel creado en JavaFx para que las descargas se añadan en pestañas
     public Button btLog; //Botón para abrir el log
@@ -67,7 +72,7 @@ public class AppController {
             FXMLLoader loader = new FXMLLoader(); //Creamos un objeto FMXLloader que se encargará de Montarnos la interfaz de lo otra ventana
             loader.setLocation(R.getUI("gesDownload.fxml")); // Le pasamos la localización de la ventana diseñada con JavaFx
 
-            DownloadController downloadController = new DownloadController(url); //Creamos su propio controler desde su clase DownloadController para gestionar los botones y demás cosas
+            DownloadController downloadController = new DownloadController(url, route); //Creamos su propio controler desde su clase DownloadController para gestionar los botones y demás cosas
             loader.setController(downloadController);
             //Todo revisar si crearé un VBox o el padre será de otro tipo
             VBox downloadBox = loader.load(); //En este caso el padre de la ventana es un Vbox en JavaFx
@@ -168,13 +173,22 @@ public class AppController {
             fnfe.printStackTrace();
         }
 
-
-
         //Leo el fichero y cargo cada linea un List (Clase Files)
 
         //Files.read //Clase gana que lee todas las lineas de uin fichero y nos devuelve un lista de String con las lineas del fichero
 
         // Para cada linea, llamar al método launchDownload que por cada linea de fichero que le pasamos creo una pestaña de descarga
+    }
+
+    /**
+     * Seleccionar directorio de Descargas
+     */
+    @FXML
+    public void routeSelect(Event event) {
+        DirectoryChooser directoryChooser = new DirectoryChooser(); //Clase para buscar y selecionar un directorio
+        File file = directoryChooser.showDialog(tfRoute.getScene().getWindow()); //Creamos un fichero con la ruta seleccionado en el explorador de Windows
+        route = file.getPath(); //Ingresamos la ruta dentro del String
+        tfRoute.setText(route); //devolvemos el string al label
     }
 }
 

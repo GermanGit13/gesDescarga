@@ -25,14 +25,14 @@ public class DownloadController implements Initializable {
     public ProgressBar pbProgress;
     private String urlText;
     private DownloadTask downloadTask;
-    private Stage stage;
-    private String dir = "H:\\Grapo DAM\\10 Programación de Servicios y Procesos\\AP_German_Rodriguez\\downloads";
+    private String route;
 
     private static final Logger logger = LogManager.getLogger(DownloadController.class);
 
-    public DownloadController(String urlText) {
+    public DownloadController(String urlText, String route) {
         logger.info("Descarga " + urlText + " creada");
         this.urlText = urlText;
+        this.route = route;
     }
 
     /**
@@ -47,7 +47,7 @@ public class DownloadController implements Initializable {
         // Quitar comentario para descarga desde fichero desde este método sería automático el guardar los ficheros
         try {
             String fileName = this.urlText.substring(this.urlText.lastIndexOf("/") + 1); //Extraemos la parte a continuación del / para ponerla como nombre de fichero
-            File file = new File(dir, fileName);
+            File file = new File(route, fileName);
             file.createNewFile();
 
             downloadTask = new DownloadTask(urlText, file); //Le pasamos a Task la url y el archivo donde se guarda
