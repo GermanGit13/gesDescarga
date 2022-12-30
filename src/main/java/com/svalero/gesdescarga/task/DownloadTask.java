@@ -52,6 +52,7 @@ public class DownloadTask extends Task<Integer> {
         int bytesRead;
         int totalRead = 0;
         double downloadProgress = 0;
+        double downloadSize =0;
         //Dos formas de medir el tiempo de descarga Libreria de JAva estandar o Clase de apache commos
         //Instant es de la libreia básica de JAVA la comentamos para usar las de apache commons
 //        Instant start = Instant.now(); //Libreria que permite calcular el tiempo que lleva la descarga recogemos el método now
@@ -69,8 +70,8 @@ public class DownloadTask extends Task<Integer> {
          */
         while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
             downloadProgress = ((double) totalRead / fileSize);
-
             updateProgress(downloadProgress, 1);
+
             //updateMessage(downloadProgress * 100 + " % "); Escribir en la barra de progreso lo comento porque usare o la opcion JAva o Apache commons
 
             //PAra la libreria java
@@ -79,7 +80,7 @@ public class DownloadTask extends Task<Integer> {
 //            updateMessage(Math.round(downloadProgress *100) + "%\t\t\t\t" +Math.round(elapsedTime) + "sec."); //Para redondear el porcentaje de descarga completado. \t -> para separar, son tabuladores
 
             //Para usar la libreria de Apache Commons gracias a watch.getTime se encarga de ir realizando el calculo de tiempo
-            updateMessage(Math.round(downloadProgress * 100) + " %\t\t\t\t" + Math.round(watch.getTime()/1000) + " sec."); //Para redondear el porcentaje de descarga completado. \t -> para separar, son tabuladores
+            updateMessage(Math.round(downloadProgress * 100) + " %\t\t\t\t" + Math.round(watch.getTime()/1000) + " sec.\t\t\t\t" + Math.round(totalRead/ (1024 * 1024)) + " Mb /" + Math.round(fileSize / (1024*1024)) + " Mb."); //Para redondear el porcentaje de descarga completado. \t -> para separar, son tabuladores
 
             //Modificado para hacer la descarga más lenta
             //Thread.sleep(1); //Cada bloque de descarga de 1024 Mb para el Thread un milisegundo
