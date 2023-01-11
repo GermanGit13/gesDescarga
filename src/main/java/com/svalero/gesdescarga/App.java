@@ -43,6 +43,8 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
+        //System.out.println(System.getProperty("user.dir")); //Para ver la ruta de trabajo
+        //System.out.println(System.getProperty("user.home")); //Para ver la ruta de home de usuario
         launch();
     }
 }

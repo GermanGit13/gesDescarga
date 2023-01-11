@@ -53,6 +53,14 @@
                      <children>
                         <HBox>
                            <children>
+                              <Button fx:id="btShowRoute" mnemonicParsing="false" onAction="#routeShow" text="Ver Ruta">
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </Button>
                               <Button fx:id="btRoute" mnemonicParsing="false" onAction="#routeSelect" text="Cambiar Ruta">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -61,7 +69,7 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </HBox.margin>
                               </Button>
-                              <TextField fx:id="tfRoute" prefHeight="25.0" prefWidth="564.0" promptText="H:/GERMAN/Descargas">
+                              <TextField fx:id="tfRoute" prefHeight="27.0" prefWidth="506.0">
                                  <padding>
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </padding>

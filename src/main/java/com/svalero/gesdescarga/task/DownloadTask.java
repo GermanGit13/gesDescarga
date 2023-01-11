@@ -40,7 +40,7 @@ public class DownloadTask extends Task<Integer> {
         URLConnection urlConnection = url.openConnection();
         double fileSize = urlConnection.getContentLength(); // Podemos leer el tamaño del fichero alojado en la URL
         //Para poder poner una limitación máxima de descarga por ejemplo si no es cuenta premiun
-//        double megaSize = fileSize / 1048576; // Tamaño del fichero que queremos descargar pasado a MB
+        double megaSize = fileSize / 1048576; // Tamaño del fichero que queremos descargar pasado a MB
 //        if (megaSize < 10) { //Si el tamaño de la descarga es superior a 10 Mb
 //            logger.trace("Maximo tamaño de fichero alcanzado"); //Lo escribimos en el log
 //            throw new Exception("Max. size"); //Creamos una excepción para que no deje proceder a la descarga se la mandamos al controlador DownloadCrontroller
@@ -81,6 +81,7 @@ public class DownloadTask extends Task<Integer> {
 
             //Para usar la libreria de Apache Commons gracias a watch.getTime se encarga de ir realizando el calculo de tiempo
             updateMessage(Math.round(downloadProgress * 100) + " %\t\t\t\t" + Math.round(watch.getTime()/1000) + " sec.\t\t\t\t" + Math.round(totalRead/ (1024 * 1024)) + " Mb /" + Math.round(fileSize / (1024*1024)) + " Mb."); //Para redondear el porcentaje de descarga completado. \t -> para separar, son tabuladores
+            //updateMessage(Math.round(downloadProgress * 100) + " %\t\t\t\t" + Math.round(downloadProgress*megaSize) + " de " + Math.round(megaSize) + "MB");//Otra Opción Para ver porcentaje descarga, tamaño total y descarga en mb. Borja
 
             //Modificado para hacer la descarga más lenta
             //Thread.sleep(1); //Cada bloque de descarga de 1024 Mb para el Thread un milisegundo
