@@ -80,7 +80,7 @@ public class DownloadTask extends Task<Integer> {
 //            updateMessage(Math.round(downloadProgress *100) + "%\t\t\t\t" +Math.round(elapsedTime) + "sec."); //Para redondear el porcentaje de descarga completado. \t -> para separar, son tabuladores
 
             //Para usar la libreria de Apache Commons gracias a watch.getTime se encarga de ir realizando el calculo de tiempo
-            updateMessage(Math.round(downloadProgress * 100) + " %\t\t" + Math.round(watch.getTime()/1000) + " sec.\t\t" + Math.round(totalRead/ (1024 * 1024)) + " Mb /" + Math.round(fileSize / (1024*1024)) + " Mb." + "Mb/seg"); //Para redondear el porcentaje de descarga completado. \t -> para separar, son tabuladores
+            updateMessage(Math.round(downloadProgress * 100) + " %\t\t" + Math.round(watch.getTime()/1000) + " sec.\t\t" + Math.round(totalRead/ (1024 * 1024)) + " Mb /" + Math.round(fileSize / (1024*1024)) + " Mb. " + Math.round((downloadProgress*megaSize)/watch.getTime()/1000) + " Mbs"); //Para redondear el porcentaje de descarga completado. \t -> para separar, son tabuladores
             //updateMessage(Math.round(downloadProgress * 100) + " %\t\t\t\t" + Math.round(downloadProgress*megaSize) + " de " + Math.round(megaSize) + "MB");//Otra Opción Para ver porcentaje descarga, tamaño total y descarga en mb. Borja
 
             //Modificado para hacer la descarga más lenta
