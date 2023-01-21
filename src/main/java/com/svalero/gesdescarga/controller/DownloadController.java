@@ -26,13 +26,15 @@ public class DownloadController implements Initializable {
     private String urlText;
     private DownloadTask downloadTask;
     private String route;
+    private int timeOut;
 
     private static final Logger logger = LogManager.getLogger(DownloadController.class);
 
-    public DownloadController(String urlText, String route) {
+    public DownloadController(String urlText, String route, int timeOut) {
         logger.info("Descarga " + urlText + " creada");
         this.urlText = urlText;
         this.route = route;
+        this.timeOut = timeOut;
     }
 
     /**
@@ -67,7 +69,17 @@ public class DownloadController implements Initializable {
             downloadTask.messageProperty()
                     .addListener((observableValue, oldValue, newValue) -> lbStatus.setText(newValue));
 
-            new Thread(downloadTask).start(); //Se crea el Thread con la tarea de descarga
+            // Timer para iniciar descarga
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask(){
+                        @Override
+                        public void run(){
+                            new Thread(downloadTask).start(); //Se crea el Thread con la tarea de descarga
+                        }
+                    },
+                    1000*this.timeOut
+            );
+
         } catch (MalformedURLException murle) {
             murle.printStackTrace();
             logger.error("URL mal formada", murle.fillInStackTrace());
