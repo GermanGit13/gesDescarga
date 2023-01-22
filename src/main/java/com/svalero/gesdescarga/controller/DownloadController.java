@@ -19,9 +19,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class DownloadController implements Initializable {
-
+    @FXML
     public TextField tfUrl;
+    @FXML
     public Label lbStatus;
+    @FXML
     public ProgressBar pbProgress;
     private String urlText;
     private DownloadTask downloadTask;

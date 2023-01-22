@@ -28,15 +28,23 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class AppController {
-
+    @FXML
     public TextField tfUrl; //Caja de Texto que usamos en JavaFx
+    @FXML
     public TextField tfRoute; //Caja con la ruta de Descarga
+    @FXML
     public TextField tfTimeOut; // Para recibir los minutos a programar la descarga
+    @FXML
     public Button btDownload; // Botón que usamos para la descarga en JavaFx
+    @FXML
     public Button btRoute; //Boton para buscar la ruta de guardar
+    @FXML
     public Button btShowRoute; // Para mostrar ruta de descarga
+    @FXML
     public Button btLog; //Botón para abrir el log
+    @FXML
     public TabPane tpDownloads; //Panel creado en JavaFx para que las descargas se añadan en pestañas
+    @FXML
     public VBox vbLog; //lo uso para el log
     public String route = System.getProperty("user.dir"); //Ruta con la descarga
 
