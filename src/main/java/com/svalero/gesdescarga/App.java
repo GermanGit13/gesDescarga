@@ -45,7 +45,21 @@ public class App extends Application {
         stage.setScene(scene); // Le indicamos que tiene que inicialiazar
         stage.setTitle("Splash Screen"); //Ponerle nombre a la ventana principal
         stage.show(); // Le indicamos que pinte la escena
+    }
 
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+}
+
+/**
+ * Sin SplashSreen
+ */
 //        /**
 //         * Clase FXMLLoader: Es un formato basado en XML que permite a los desarrolladores definir interfaces de usuario de manera declarativa,
 //         * en lugar de definir interfaces de manera programática, es decir, mediante el uso directo de las API de JavaFX
@@ -59,15 +73,3 @@ public class App extends Application {
 //        stage.setScene(scene); // Le indicamos que tiene que inicialiazar
 //        stage.setTitle("Gestor de Descargadas"); //Ponerle nombre a la ventana principal
 //        stage.show(); // Le indicamos que pinte la escena
-    }
-
-    @Override
-    public void stop() throws Exception {
-        super.stop();
-    }
-
-    public static void main(String[] args) {
-        launch();
-    }
-}
-
