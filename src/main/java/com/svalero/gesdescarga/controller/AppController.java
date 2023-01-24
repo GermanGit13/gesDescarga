@@ -28,15 +28,25 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class AppController {
-
+    @FXML
     public TextField tfUrl; //Caja de Texto que usamos en JavaFx
+    @FXML
     public TextField tfRoute; //Caja con la ruta de Descarga
+    @FXML
+    public TextField tfTimeOut; // Para recibir los minutos a programar la descarga
+    @FXML
     public Button btDownload; // Botón que usamos para la descarga en JavaFx
+    @FXML
     public Button btRoute; //Boton para buscar la ruta de guardar
+    @FXML
+    public Button btShowRoute; // Para mostrar ruta de descarga
+    @FXML
     public Button btLog; //Botón para abrir el log
+    @FXML
     public TabPane tpDownloads; //Panel creado en JavaFx para que las descargas se añadan en pestañas
+    @FXML
     public VBox vbLog; //lo uso para el log
-    public String route = "H:/GERMAN/Descargas"; //Ruta con la descarga
+    public String route = System.getProperty("user.dir"); //Ruta con la descarga
 
     private Map<String, DownloadController> allDownloads; // Creamos un mapa para guardar todas las descargas
 
@@ -72,14 +82,21 @@ public class AppController {
         try {
             FXMLLoader loader = new FXMLLoader(); //Creamos un objeto FMXLloader que se encargará de Montarnos la interfaz de lo otra ventana
             loader.setLocation(R.getUI("gesDownload.fxml")); // Le pasamos la localización de la ventana diseñada con JavaFx
+            String timeSchedule = tfTimeOut.getText(); //recogemos el valor introducido
+            // Valor por defecto en el timer en caso de no introducir la entrada
+            if (timeSchedule.length() == 0)
+                timeSchedule = "0";
+            int timeDownload = Integer.parseInt(timeSchedule); // lo pasamos a int
 
-            DownloadController downloadController = new DownloadController(url, route); //Creamos su propio controler desde su clase DownloadController para gestionar los botones y demás cosas
+            DownloadController downloadController = new DownloadController(url, route, timeDownload); //Creamos su propio controler desde su clase DownloadController para gestionar los botones y demás cosas
             loader.setController(downloadController); //cargamos el controller
             //Todo revisar si crearé un VBox o el padre será de otro tipo
             VBox downloadBox = loader.load(); //En este caso el padre de la ventana es un Vbox en JavaFx
 
             String filename = url.substring(url.lastIndexOf("/") + 1); //para añadirle a cada pestaña el final de la URL que le pasamos, gracias al filename.
+            //tpDownloads.setTabClosingPolicy(TabClosingPolicy.ALL_TABS); Otra forma de poder cerrar las pestañas con la política de JavaFX -Borja-
             tpDownloads.getTabs().add(new Tab(filename, downloadBox)); //Lo añadimos al panel de ventana de "gesDescargaHome.fxml"y añadimos una PESTAÑA por cada descarga que le damos.
+            //Se puede hacer desde Scence en las propiedades del TabPane ->TabClosingPolicy poner ALL_TABS
             downloadBox.getScene().getWindow(); //Parar cerrar cada pestaña creada en el Tab
 
             allDownloads.put(url, downloadController); //Cada vez que lancemos una descarga lo añadimos al mapa para poder cancelarlas todas, tenemos cada url de descarga asociado al objeto que se crea por cada descarga
@@ -189,6 +206,15 @@ public class AppController {
         DirectoryChooser directoryChooser = new DirectoryChooser(); //Clase para buscar y selecionar un directorio
         File file = directoryChooser.showDialog(tfRoute.getScene().getWindow()); //Creamos un fichero con la ruta seleccionado en el explorador de Windows
         route = file.getPath(); //Ingresamos la ruta dentro del String
+        tfRoute.setText(route); //devolvemos el string al label
+    }
+
+    /**
+     * Método que llamamos desde le boton btRouteShow para mostrar en el TExt Field la ruta de descarga
+     */
+    @FXML
+    public void routeShow(Event event) {
+        route = System.getProperty("user.dir"); //Ingresamos la ruta dentro del String
         tfRoute.setText(route); //devolvemos el string al label
     }
 }

@@ -12,7 +12,7 @@
    <children>
       <Label fx:id="idNombre" contentDisplay="CENTER" prefHeight="17.0" prefWidth="610.0" text="Gestor de Descagas" />
       <TextField fx:id="tfUrl" />
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox prefHeight="56.0" prefWidth="360.0">
          <children>
             <Button fx:id="btStart" mnemonicParsing="false" onAction="#start" text="Descargar">
                <HBox.margin>

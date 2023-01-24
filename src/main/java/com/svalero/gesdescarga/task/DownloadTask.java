@@ -12,6 +12,8 @@ import java.io.FileOutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.time.Duration;
+import java.time.Instant;
 
 /**
  * Extendemos de la clase Task que es la que nos permite realizar procesos de manera concurrente
@@ -40,7 +42,7 @@ public class DownloadTask extends Task<Integer> {
         URLConnection urlConnection = url.openConnection();
         double fileSize = urlConnection.getContentLength(); // Podemos leer el tamaño del fichero alojado en la URL
         //Para poder poner una limitación máxima de descarga por ejemplo si no es cuenta premiun
-//        double megaSize = fileSize / 1048576; // Tamaño del fichero que queremos descargar pasado a MB
+        double megaSize = fileSize / 1048576; // Tamaño del fichero que queremos descargar pasado a MB
 //        if (megaSize < 10) { //Si el tamaño de la descarga es superior a 10 Mb
 //            logger.trace("Maximo tamaño de fichero alcanzado"); //Lo escribimos en el log
 //            throw new Exception("Max. size"); //Creamos una excepción para que no deje proceder a la descarga se la mandamos al controlador DownloadCrontroller
@@ -52,15 +54,16 @@ public class DownloadTask extends Task<Integer> {
         int bytesRead;
         int totalRead = 0;
         double downloadProgress = 0;
+        double downloadSize = 0;
         //Dos formas de medir el tiempo de descarga Libreria de JAva estandar o Clase de apache commos
         //Instant es de la libreia básica de JAVA la comentamos para usar las de apache commons
-//        Instant start = Instant.now(); //Libreria que permite calcular el tiempo que lleva la descarga recogemos el método now
-//        Instant current; //Tiempo que lleva descargando
-//        float elapsedTime; //Tiempo calculado
+        Instant start = Instant.now(); //Libreria que permite calcular el tiempo que lleva la descarga recogemos el método now
+        Instant current; //Tiempo que lleva descargando
+        float elapsedTime; //Tiempo calculado
 
         //Clase StopWatch de apache commons para medir el tiempo de la descarga
-        StopWatch watch = new StopWatch(); //Creamos el objeto
-        watch.start(); //Inicializamos el cronometro ya no guardamos el tiempo, el objeto se encarga de hacerlo a diferencia de si usamos la libreria de java
+//        StopWatch watch = new StopWatch(); //Creamos el objeto
+//        watch.start(); //Inicializamos el cronometro ya no guardamos el tiempo, el objeto se encarga de hacerlo a diferencia de si usamos la libreria de java
 
         /**
          * Con un buble ir leyendo trocito a trocito de la descarga
@@ -69,17 +72,18 @@ public class DownloadTask extends Task<Integer> {
          */
         while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
             downloadProgress = ((double) totalRead / fileSize);
-
             updateProgress(downloadProgress, 1);
+
             //updateMessage(downloadProgress * 100 + " % "); Escribir en la barra de progreso lo comento porque usare o la opcion JAva o Apache commons
 
             //PAra la libreria java
-//            current = Instant.now(); //Calcular el tiempo actual por cada kilobytes que vamos descargando en cada interaccion
-//            elapsedTime = Duration.between(start, current).toSeconds();
-//            updateMessage(Math.round(downloadProgress *100) + "%\t\t\t\t" +Math.round(elapsedTime) + "sec."); //Para redondear el porcentaje de descarga completado. \t -> para separar, son tabuladores
+            current = Instant.now(); //Calcular el tiempo actual por cada kilobytes que vamos descargando en cada interaccion
+            elapsedTime = Duration.between(start, current).toSeconds();
+            updateMessage(Math.round(downloadProgress *100) + "%\t\t" +Math.round(elapsedTime) + "sec.\t\t" + Math.round(totalRead/ (1024 * 1024)) + " Mb /" + Math.round(megaSize) + " Mb.\t\t" + Math.round(megaSize/elapsedTime ) + "Mb/s"); //Para redondear el porcentaje de descarga completado. \t -> para separar, son tabuladores
 
             //Para usar la libreria de Apache Commons gracias a watch.getTime se encarga de ir realizando el calculo de tiempo
-            updateMessage(Math.round(downloadProgress * 100) + " %\t\t\t\t" + Math.round(watch.getTime()/1000) + " sec."); //Para redondear el porcentaje de descarga completado. \t -> para separar, son tabuladores
+//            updateMessage(Math.round(downloadProgress * 100) + " %\t\t" + Math.round(watch.getTime()/1000) + " sec.\t\t" + Math.round(totalRead/ (1024 * 1024)) + " Mb /" + Math.round(megaSize) + " Mb. " + Math.round(Float.parseFloat((megaSize/watch.getTime()) + "Mb/s"))); //Para redondear el porcentaje de descarga completado. \t -> para separar, son tabuladores
+            //updateMessage(Math.round(downloadProgress * 100) + " %\t\t\t\t" + Math.round(downloadProgress*megaSize) + " de " + Math.round(megaSize) + "MB");//Otra Opción Para ver porcentaje descarga, tamaño total y descarga en mb. Borja
 
             //Modificado para hacer la descarga más lenta
             //Thread.sleep(1); //Cada bloque de descarga de 1024 Mb para el Thread un milisegundo

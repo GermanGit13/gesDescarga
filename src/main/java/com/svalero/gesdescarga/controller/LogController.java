@@ -15,12 +15,11 @@ import java.util.ResourceBundle;
 
 public class LogController implements Initializable {
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         try {
-            File logFile = new File("H:\\Grapo DAM\\10 Programación de Servicios y Procesos\\AP_German_Rodriguez\\multidescargas.log");
+            File logFile = new File("multidescargas.log");
 
             if (!Desktop.isDesktopSupported()) {
                 System.out.println(" no soportado");
